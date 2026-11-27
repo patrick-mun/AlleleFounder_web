@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Accueil — AlleleFounder{% endblock %}</title>
+    <meta
+      name="description"
+      content="Interface institutionnelle du logiciel AlleleFounder."
+    />
+  </head>
+  <body>
+    <!-- ── EN-TÊTE ── -->
+    <header>
+      <a href="{% url 'home' %}">AlleleFounder</a>
+    </header>
+
+    <!-- ── CONTENU ── -->
+    <main id="contenu-principal">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- ── PIED DE PAGE ── -->
+    <footer>
+      <p>Outil d’aide à l’analyse — validation scientifique requise.</p>
+    </footer>
+  </body>
+</html>

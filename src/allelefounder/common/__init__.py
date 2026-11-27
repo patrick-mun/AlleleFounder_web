@@ -1,0 +1,1 @@
+"""Composants techniques partagés."""

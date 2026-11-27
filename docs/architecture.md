@@ -23,6 +23,7 @@ et de permettre une évolution ultérieure.
 - worker isolé avant toute exécution scientifique réelle ;
 - stockage abstrait pour sources, instantanés et artefacts ;
 - configuration et secrets injectés ;
+- fichiers statiques collectés dans l’image et servis par WhiteNoise ;
 - releases sous images OCI immuables, identifiées par digest ;
 - logique métier dans des services testables, indépendants des vues ;
 - organisation résolue côté serveur et filtrage systématique de tous les objets.
@@ -40,7 +41,8 @@ et de permettre une évolution ultérieure.
 
 ## 3. Arborescence proposée
 
-L’arborescence n’est pas encore créée ; elle guide l’initialisation du lot 1.
+Le socle de cette arborescence est créé par le lot 1 ; les applications métier
+restent ajoutées progressivement dans les lots qui les concernent.
 
 ```text
 AlleleFounder_web/
@@ -50,7 +52,7 @@ AlleleFounder_web/
 ├── manage.py
 ├── src/
 │   └── allelefounder/
-│       ├── config/                 réglages, URLs, ASGI et WSGI
+│       ├── config/                 réglages, URLs et WSGI
 │       ├── accounts/               utilisateur, invitations, MFA et sessions
 │       ├── organizations/          organisations, membres, rôles et contexte
 │       ├── studies/                études, variants, familles et individus

@@ -56,3 +56,9 @@ class HealthTests(SimpleTestCase):
             response["X-Request-ID"],
             r"^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
         )
+
+    def test_admin_static_asset_is_available(self) -> None:
+        response = self.client.get("/static/admin/css/base.css")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], 'text/css; charset="utf-8"')

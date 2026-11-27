@@ -38,7 +38,7 @@ Django n'est créé dans ce lot.
 
 ## Lot 1 — socle Django, PostgreSQL et santé
 
-**Statut :** implémenté ; construction OCI à rejouer avec un démon Docker actif.
+**Statut :** terminé et vérifié le 27 novembre 2026.
 
 ### Livrables
 
@@ -61,6 +61,17 @@ Django n'est créé dans ce lot.
 
 Une page synthétique et les contrôles de santé fonctionnent sur PostgreSQL ;
 aucun SQLite implicite, stockage génétique ou moteur scientifique n'est requis.
+
+### Validation de clôture
+
+- 14 tests Django, Ruff, `check` et `check --deploy` réussis ;
+- migrations appliquées sur PostgreSQL 18.7 et disponibilité vérifiée ;
+- image construite, exécutée sous l’UID non privilégié `10001` et Gunicorn
+  démarré sans erreur ;
+- fichiers statiques collectés à la construction, CSS de l’administration servi
+  en HTTP 200 avec compression gzip ;
+- vivacité, disponibilité, page d’accueil et administration vérifiées dans le
+  compose local.
 
 ## Lot 2 — comptes, MFA, organisations et autorisations
 

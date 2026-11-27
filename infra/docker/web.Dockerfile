@@ -8,14 +8,21 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 RUN groupadd --gid 10001 allelefounder \
-    && useradd --uid 10001 --gid allelefounder --no-create-home allelefounder
+    && useradd --uid 10001 --gid allelefounder --create-home allelefounder
 
 COPY requirements/production.txt requirements/production.txt
 RUN pip install --no-cache-dir --require-hashes -r requirements/production.txt
 
-COPY pyproject.toml README.md ./
+COPY pyproject.toml README.md manage.py ./
 COPY src/ src/
 RUN pip install --no-cache-dir --no-deps . \
+    && DJANGO_SETTINGS_MODULE=allelefounder.config.settings.base \
+       DJANGO_SECRET_KEY=build-only-not-a-secret \
+       POSTGRES_DB=unused \
+       POSTGRES_USER=unused \
+       POSTGRES_PASSWORD=unused \
+       POSTGRES_HOST=localhost \
+       python manage.py collectstatic --noinput \
     && chown -R allelefounder:allelefounder /app
 
 USER 10001:10001

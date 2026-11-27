@@ -12,6 +12,8 @@ historique. Les calculs scientifiques restent dans le moteur autonome
 Le lot 1 fournit le socle Django : PostgreSQL obligatoire, utilisateur
 personnalisé par courriel, configuration stricte, page d’accueil, pages d’erreur,
 sondes de vivacité et disponibilité, journaux JSON filtrés et image OCI.
+Les fichiers statiques versionnés sont collectés dans l’image et servis par
+WhiteNoise derrière Gunicorn.
 L’authentification complète, les organisations, les études et le raccordement
 au moteur scientifique appartiennent aux lots suivants.
 
@@ -59,6 +61,16 @@ Les contrôles ordinaires sont :
 .venv/bin/python manage.py test
 .venv/bin/python manage.py check
 .venv/bin/python manage.py makemigrations --check --dry-run
+```
+
+Pour exécuter l’ensemble dans Docker :
+
+```bash
+docker compose --env-file .env -f infra/compose/compose.yaml up -d db
+docker compose --env-file .env -f infra/compose/compose.yaml build web
+docker compose --env-file .env -f infra/compose/compose.yaml \
+  run --rm web python manage.py migrate --noinput
+docker compose --env-file .env -f infra/compose/compose.yaml up -d web
 ```
 
 Les règles de contribution et contrôles de sécurité sont définis dans

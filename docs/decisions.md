@@ -43,6 +43,8 @@ Les écarts à ne pas masquer sont :
 - PostgreSQL 18.7 pour l’environnement conteneurisé du lot 1 ;
 - configuration par variables d’environnement validées strictement, sans repli
   SQLite ;
+- WhiteNoise 6.12.0 pour servir les fichiers statiques collectés dans l’image
+  applicative Gunicorn ;
 - Django modulaire, PostgreSQL, rendu serveur et Python 3.12.
 - Utilisateur personnalisé avant la première migration.
 - Schéma partagé avec `Organization` comme frontière obligatoire et testée.

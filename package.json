@@ -1,0 +1,18 @@
+{
+  "name": "allelefounder-web-tooling",
+  "private": true,
+  "scripts": {
+    "format:check": "prettier --check 'src/**/*.css' 'tooling/*.mjs' 'stylelint.config.mjs'",
+    "lint:html": "html-validate 'src/**/*.html'",
+    "lint:css": "stylelint 'src/**/*.css'",
+    "lint:web": "npm run format:check && npm run lint:html && npm run lint:css && node tooling/check-html.mjs src/allelefounder/templates && node tooling/check-css.mjs src/allelefounder/static && node tooling/check-dead-code.mjs src --ignore helptext,errorlist"
+  },
+  "devDependencies": {
+    "html-validate": "9.7.2",
+    "prettier": "3.10.1",
+    "stylelint": "16.24.0",
+    "stylelint-config-standard": "36.0.1",
+    "stylelint-declaration-strict-value": "1.10.7",
+    "stylelint-order": "6.0.4"
+  }
+}

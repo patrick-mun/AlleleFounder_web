@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Accès en attente — AlleleFounder{% endblock %}
+{% block content %}
+<section class="error-page">
+  <p class="eyebrow">Accès indisponible</p>
+  <h1>Aucune organisation active</h1>
+  <p>
+    Contactez un administrateur AlleleFounder pour vérifier votre invitation ou
+    votre adhésion.
+  </p>
+  <a class="button button-secondary" href="{% url 'home' %}"
+    >Revenir à l’accueil</a
+  >
+</section>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Finaliser mon inscription — AlleleFounder{% endblock %}
+{% block content %}
+<!-- ── ACTIVATION ── -->
+<section class="form-page">
+  <div class="form-heading">
+    <p class="eyebrow">Invitation privée</p>
+    <h1>Finaliser mon inscription</h1>
+    <p>L’adresse invitée est <strong>{{ invitation.email }}</strong>.</p>
+    <p>
+      Le lien reçu valide cette adresse. Renseignez votre identité puis
+      choisissez une clé d’accès ou un mot de passe protégé par une application
+      de codes.
+    </p>
+  </div>
+  <form class="form-card" method="post">
+    {% csrf_token %}
+    {% if existing_account %}
+    <p>
+      Vous êtes connecté au compte invité. Confirmez pour ajouter cette
+      organisation à vos accès.
+    </p>
+    <button class="button" type="submit">Rejoindre l’organisation</button>
+    {% else %}
+    {{ form.non_field_errors }} {% for field in form %}
+    <div class="form-field">
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field
+      }}{% if field.help_text %}
+      <div class="form-help">{{ field.help_text|safe }}</div>
+      {% endif %}{{ field.errors }}
+    </div>
+    {% endfor %}
+    <button class="button" type="submit">Créer mon compte</button>
+    {% endif %}
+  </form>
+</section>
+{% endblock %}

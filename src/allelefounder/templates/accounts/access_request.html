@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Demander un accès — AlleleFounder{% endblock %}
+{% block content %}
+<!-- ── DEMANDE D’ACCÈS ── -->
+<section class="form-page">
+  <div class="form-heading">
+    <p class="eyebrow">Accès institutionnel</p>
+    <h1>Demander un accès</h1>
+    <p>
+      Présentez votre besoin. Aucun compte n’est créé avant la décision d’un
+      administrateur.
+    </p>
+    <p class="notice">
+      Ne transmettez aucune donnée génétique, clinique ou directement
+      identifiable dans cette demande.
+    </p>
+  </div>
+  <form class="form-card" method="post">
+    {% csrf_token %}{{ form.non_field_errors }} {% for field in form %}
+    <div class="form-field">
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }} {{ field.errors }}
+    </div>
+    {% endfor %}
+    <button class="button" type="submit">Envoyer ma demande</button>
+  </form>
+</section>
+{% endblock %}

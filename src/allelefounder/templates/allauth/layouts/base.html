@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block head_title %}Compte{% endblock %} — AlleleFounder</title>
+    <meta name="description" content="Accès sécurisé à AlleleFounder." />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'allelefounder/css/tokens.css' %}" />
+    <link rel="stylesheet" href="{% static 'allelefounder/css/base.css' %}" />
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body class="auth-body">
+    <a class="skip-link" href="#contenu-principal">Aller au contenu</a>
+    <!-- ── EN-TÊTE ── -->
+    <header class="auth-header">
+      <a class="brand brand-auth" href="{% url 'home' %}">AlleleFounder</a>
+      <p>Accès institutionnel sécurisé</p>
+    </header>
+    <!-- ── CONTENU ── -->
+    <main id="contenu-principal" class="auth-main">
+      <section class="auth-intro" aria-labelledby="auth-intro-title">
+        <p class="eyebrow">Espace de recherche</p>
+        <p id="auth-intro-title" class="auth-title">
+          Protéger les accès avant d’ouvrir les études.
+        </p>
+        <p>
+          L’accès initial se fait sur invitation. Une adresse professionnelle
+          vérifiée et une seconde méthode d’authentification sont obligatoires.
+        </p>
+        <p class="notice">
+          Aucune donnée génétique n’est demandée pendant l’activation.
+        </p>
+      </section>
+      <section class="auth-panel" aria-label="Authentification">
+        {% if messages %}
+        <aside aria-label="Messages système">
+          {% for message in messages %}
+          <p class="message">{{ message }}</p>
+          {% endfor %}
+        </aside>
+        {% endif %} {% block content %}{% endblock %}
+      </section>
+    </main>
+    <!-- ── PIED DE PAGE ── -->
+    <footer class="auth-footer">
+      <p>Ne communiquez jamais un code de vérification au support.</p>
+    </footer>
+    {% block extra_body %}{% endblock %}
+  </body>
+</html>

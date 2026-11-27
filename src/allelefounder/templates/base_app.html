@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {% block title %}Espace de travail — AlleleFounder{% endblock %}
+    </title>
+    <meta
+      name="description"
+      content="Espace de travail sécurisé AlleleFounder."
+    />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'allelefounder/css/tokens.css' %}" />
+    <link rel="stylesheet" href="{% static 'allelefounder/css/base.css' %}" />
+  </head>
+  <body class="app-body">
+    <a class="skip-link" href="#contenu-principal">Aller au contenu</a>
+    <!-- ── NAVIGATION DE L'APPLICATION ── -->
+    <header class="app-header">
+      <a class="brand brand-app" href="{% url 'accounts:dashboard' %}"
+        >AlleleFounder</a
+      >
+      <div class="app-organization">
+        <span>{{ organization.name }}</span
+        ><a href="{% url 'accounts:organization-select' %}">Changer</a>
+      </div>
+    </header>
+    <div class="app-shell">
+      <nav class="app-nav" aria-label="Navigation de l’espace de travail">
+        <ul>
+          <li><a href="{% url 'accounts:dashboard' %}">Vue d’ensemble</a></li>
+          <li>
+            <span class="nav-disabled" aria-disabled="true"
+              >Études — lot 3</span
+            >
+          </li>
+          <li>
+            <span class="nav-disabled" aria-disabled="true"
+              >Analyses — lot 6</span
+            >
+          </li>
+          <li>
+            <span class="nav-disabled" aria-disabled="true"
+              >Décisions — lot 8</span
+            >
+          </li>
+          <li><a href="{% url 'accounts:team' %}">Équipe</a></li>
+          <li><a href="{% url 'accounts:profile' %}">Compte</a></li>
+        </ul>
+        <form method="post" action="{% url 'account_logout' %}">
+          {% csrf_token %}<button class="nav-logout" type="submit">
+            Se déconnecter
+          </button>
+        </form>
+      </nav>
+      <!-- ── CONTENU DE L'APPLICATION ── -->
+      <main id="contenu-principal" class="app-main">
+        {% if messages %}
+        <aside aria-label="Messages système">
+          {% for message in messages %}
+          <p class="message">{{ message }}</p>
+          {% endfor %}
+        </aside>
+        {% endif %} {% block content %}{% endblock %}
+      </main>
+    </div>
+    <!-- ── PIED DE PAGE ── -->
+    <footer class="app-footer">
+      <p>Environnement synthétique · validation scientifique requise</p>
+    </footer>
+  </body>
+</html>

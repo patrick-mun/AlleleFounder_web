@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Accueil — AlleleFounder{% endblock %}
+{% block content %}
+<!-- ── PRÉSENTATION ── -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Recherche familiale traçable</p>
+    <h1>Explorer un possible effet fondateur sans perdre la traçabilité.</h1>
+    <p class="hero-summary">
+      Organisez vos études, suivez chaque étape d’analyse et relisez les
+      conclusions avec des limites scientifiques visibles.
+    </p>
+    <div class="action-group">
+      <a class="button" href="{% url 'accounts:access-request' %}"
+        >Demander un accès</a
+      >
+      <a class="button button-secondary" href="#fonctionnement"
+        >Voir le fonctionnement</a
+      >
+    </div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <span class="hero-mark">AF</span>
+    <span class="hero-line"></span>
+  </div>
+</section>
+
+<!-- ── FONCTIONNEMENT ── -->
+<section id="fonctionnement" class="feature-section">
+  <div class="section-heading">
+    <p class="eyebrow">Un parcours explicite</p>
+    <h2>De la cohorte à la relecture, chaque étape reste vérifiable.</h2>
+  </div>
+  <ul class="feature-grid">
+    <li class="feature-card">
+      <span class="feature-number">01</span>
+      <h3>Pipeline audité</h3>
+      <p>
+        Les entrées, étapes et artefacts sont versionnés et reliés à leur
+        provenance.
+      </p>
+    </li>
+    <li class="feature-card">
+      <span class="feature-number">02</span>
+      <h3>Décisions humaines</h3>
+      <p>
+        Les relectures sont liées à l’empreinte exacte des éléments présentés.
+      </p>
+    </li>
+    <li class="feature-card">
+      <span class="feature-number">03</span>
+      <h3>Résultats prudents</h3>
+      <p>
+        Faits techniques, interprétations et limites scientifiques restent
+        séparés.
+      </p>
+    </li>
+  </ul>
+</section>
+
+<!-- ── SÉCURITÉ ── -->
+<section id="securite" class="security-section">
+  <div>
+    <p class="eyebrow">Accès institutionnel</p>
+    <h2>Invitation privée et double vérification obligatoires.</h2>
+  </div>
+  <p>
+    Chaque accès est rattaché à une organisation et à un rôle. L’application ne
+    réalise aucun calcul scientifique dans le processus web.
+  </p>
+</section>
+{% endblock %}

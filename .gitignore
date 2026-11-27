@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Configuration locale et secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Django
+db.sqlite3
+*.sqlite3
+media/
+staticfiles/
+*.log
+
+# Données et artefacts générés
+data/
+uploads/
+artifacts/
+runs/
+
+# Tests et outils
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Éditeurs et système
+.vscode/
+.idea/
+.DS_Store

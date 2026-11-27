@@ -56,6 +56,19 @@ Les écarts à ne pas masquer sont :
 - Worker séparé pour le moteur et les outils scientifiques.
 - Images applicative et scientifique distinctes lors du raccordement réel.
 - Données synthétiques uniquement jusqu’à clôture de la porte de sécurité.
+- Livraison progressive des pages à partir du lot 2, selon la carte décrite dans
+  `ui_delivery_plan.md` ; le socle technique du lot 1 n'est pas l'interface
+  produit.
+- Assistant d'étude en sept repères : Contexte, Cible, Familles, Sources,
+  Génotypes, Vérification, puis Gel et lancement.
+- `django-allauth[mfa]` 65.23.0 pour l'adresse vérifiée, TOTP, codes de
+  récupération, passkeys et sessions ; les secrets MFA sont chiffrés au repos
+  par un adaptateur AlleleFounder avec une clé de production distincte, et
+  l'inscription publique reste fermée.
+- demande d'accès publique sans création de compte, décision par un
+  administrateur de plateforme, puis inscription par lien personnel ; le lien
+  valide l'adresse et le demandeur renseigne lui-même son identité avant de
+  choisir passkey ou mot de passe avec TOTP.
 
 ## 4. Proposé
 
@@ -70,6 +83,8 @@ Les écarts à ne pas masquer sont :
 - invitation privée, adresse vérifiée et MFA pour le premier pilote ;
 - identifiants internes opaques dans les tâches et les URLs ;
 - faux adaptateur moteur jusqu’au lot 6 inclus.
+- maquettes d'architecture utilisées comme référence de parcours et de
+  hiérarchie visuelle ; textes publics, logo et domaine restent à valider.
 
 ## 5. Décisions réellement bloquantes
 
@@ -89,7 +104,7 @@ par la migration initiale `accounts.0001_initial` avant toute migration métier.
 
 | Échéance | Décision bloquante |
 |---|---|
-| Lot 2 | bibliothèque MFA/invitation et stratégie d’intégration future au SSO CHU |
+| Lot 2 | stratégie d’intégration future au SSO CHU ; la bibliothèque MFA/invitation est désormais décidée |
 | Lot 4 | backend objet initial, chiffrement, tailles, formats et rétention des imports |
 | Lot 5 | entrée publique supportée pour valider toutes les entrées V2 compilées |
 | Lot 6 | broker, sémantique de livraison, verrouillage et contrat de reprise |

@@ -28,4 +28,4 @@ RUN pip install --no-cache-dir --no-deps . \
 USER 10001:10001
 EXPOSE 8000
 
-CMD ["gunicorn", "allelefounder.config.wsgi:application", "--bind=0.0.0.0:8000", "--workers=2", "--error-logfile=-"]
+CMD ["gunicorn", "allelefounder.config.wsgi:application", "--bind=0.0.0.0:8000", "--workers=2", "--worker-class=gthread", "--threads=4", "--timeout=60", "--graceful-timeout=30", "--access-logfile=-", "--error-logfile=-"]

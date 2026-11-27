@@ -1,0 +1,55 @@
+/* ============================================================
+   tokens.css
+   Rôle : valeurs de conception partagées par l'interface.
+   Pages concernées : toutes les pages.
+   ============================================================ */
+
+:root {
+  --color-ink: #173238;
+  --color-muted: #5f777b;
+  --color-brand: #176b68;
+  --color-brand-dark: #0f514f;
+  --color-brand-soft: #e5f3f0;
+  --color-accent: #d6874a;
+  --color-accent-soft: #fff1e4;
+  --color-surface: #fff;
+  --color-canvas: #f4f7f6;
+  --color-line: #cfddda;
+  --color-danger: #a33f3f;
+  --color-danger-soft: #fbeaea;
+  --color-focus: #0b5bd3;
+  --color-overlay: rgb(15 81 79 / 12%);
+  --font-sans:
+    inter, ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont,
+    "segoe ui", sans-serif;
+  --font-display: georgia, "times new roman", serif;
+  --text-xs: 0.78rem;
+  --text-sm: 0.9rem;
+  --text-md: 1rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.55rem;
+  --text-2xl: clamp(2rem, 4vw, 3.4rem);
+  --line-compact: 1.2;
+  --line-normal: 1.55;
+  --space-1: 0.3rem;
+  --space-2: 0.55rem;
+  --space-3: 0.85rem;
+  --space-4: 1.15rem;
+  --space-5: 1.6rem;
+  --space-6: 2.2rem;
+  --space-7: 3.2rem;
+  --space-8: 5rem;
+  --radius-sm: 0.35rem;
+  --radius-md: 0.7rem;
+  --radius-lg: 1.2rem;
+  --radius-round: 999rem;
+  --shadow-card: 0 1rem 3rem rgb(23 50 56 / 9%);
+  --border-thin: 1px;
+  --border-thick: 2px;
+  --content-wide: 76rem;
+  --content-copy: 42rem;
+  --sidebar-width: 15rem;
+  --target-min: 2.75rem;
+  --logo-size: 4.5rem;
+  --visual-size: 18rem;
+}

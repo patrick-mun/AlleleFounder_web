@@ -10,8 +10,18 @@ logger = logging.getLogger(__name__)
 
 
 def home(request: HttpRequest) -> HttpResponse:
-    """Affiche la page synthétique du premier lot."""
+    """Affiche l'accueil public du produit."""
     return render(request, "home.html")
+
+
+def permission_denied_page(request: HttpRequest) -> HttpResponse:
+    """Affiche un refus sans révéler l'existence d'une ressource."""
+    return render(request, "errors/403.html", status=403)
+
+
+def service_unavailable(request: HttpRequest) -> HttpResponse:
+    """Présente une indisponibilité contrôlée sans diagnostic sensible."""
+    return render(request, "errors/503.html", status=503)
 
 
 def liveness(request: HttpRequest) -> JsonResponse:

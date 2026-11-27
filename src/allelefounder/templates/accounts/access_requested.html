@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Demande reçue — AlleleFounder{% endblock %}
+{% block content %}
+<!-- ── CONFIRMATION ── -->
+<section class="status-page">
+  <p class="eyebrow">Demande transmise</p>
+  <h1>Votre demande a bien été reçue.</h1>
+  <p>
+    Un administrateur va l’examiner. Si elle est acceptée, vous recevrez un
+    lien personnel pour renseigner votre identité et choisir votre méthode de
+    connexion.
+  </p>
+  <p class="notice">
+    En environnement local, ouvrez Mailpit sur
+    <a href="http://localhost:8025">localhost:8025</a> pour consulter les
+    messages de test.
+  </p>
+  <a class="button" href="{% url 'home' %}">Revenir à l’accueil</a>
+</section>
+{% endblock %}

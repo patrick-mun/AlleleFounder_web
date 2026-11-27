@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Demandes d’accès — AlleleFounder{% endblock %}
+{% block content %}
+<!-- ── EXAMEN DES DEMANDES ── -->
+<section class="review-page">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">Administration de la plateforme</p>
+      <h1>Demandes d’accès</h1>
+      <p>
+        L’administrateur attribue une organisation et un rôle. Le demandeur
+        renseignera lui-même son identité et sa méthode de connexion.
+      </p>
+    </div>
+  </header>
+  {% if request_cards %}
+  <ul class="request-list">
+    {% for card in request_cards %}
+    <li class="request-card">
+      <div class="request-summary">
+        <h2>{{ card.access_request.email }}</h2>
+        <p>
+          <strong>Établissement :</strong>
+          {{ card.access_request.institution }}
+        </p>
+        <p>{{ card.access_request.justification }}</p>
+        <p class="form-help">
+          Reçue le {{ card.access_request.created_at|date:"d/m/Y à H:i" }}
+        </p>
+      </div>
+      <form
+        class="decision-form"
+        method="post"
+        action="{% url 'accounts:approve-access-request' card.access_request.public_id %}"
+      >
+        {% csrf_token %} {% for field in card.form %}
+        <div class="form-field">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }} {{ field.errors }}
+        </div>
+        {% endfor %}
+        <button class="button" type="submit">Accepter et envoyer le lien</button>
+      </form>
+      <form
+        method="post"
+        action="{% url 'accounts:reject-access-request' card.access_request.public_id %}"
+      >
+        {% csrf_token %}
+        <button class="button button-secondary" type="submit">
+          Refuser la demande
+        </button>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="empty-state">
+    <h2>Aucune demande en attente</h2>
+    <p>Les nouvelles demandes apparaîtront ici.</p>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

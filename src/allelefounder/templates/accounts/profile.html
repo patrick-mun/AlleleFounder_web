@@ -1,0 +1,43 @@
+{% extends "base_app.html" %}
+{% block title %}Compte — AlleleFounder{% endblock %}
+{% block content %}
+<!-- ── COMPTE ── -->
+<header class="page-heading">
+  <div>
+    <p class="eyebrow">Sécurité du compte</p>
+    <h1>{{ user.get_full_name|default:user.email }}</h1>
+    <p>{{ user.email }}</p>
+  </div>
+</header>
+<div class="settings-grid">
+  <section class="settings-card">
+    <h2>Authentification</h2>
+    <p>
+      Gérez votre mot de passe, vos méthodes MFA, passkeys et codes de
+      récupération.
+    </p>
+    <ul class="link-list">
+      <li>
+        <a href="{% url 'account_change_password' %}"
+          >Modifier le mot de passe</a
+        >
+      </li>
+      <li><a href="{% url 'mfa_index' %}">Gérer la double vérification</a></li>
+      <li>
+        <a href="{% url 'usersessions_list' %}">Voir les sessions ouvertes</a>
+      </li>
+    </ul>
+  </section>
+  <section class="settings-card">
+    <h2>Organisations</h2>
+    <ul class="simple-list">
+      {% for item in memberships %}
+      <li>
+        <span>{{ item.organization.name }}</span
+        ><span>{{ item.get_role_display }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>
+{% endblock %}

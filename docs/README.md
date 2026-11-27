@@ -13,6 +13,8 @@ Les contrats scientifiques restent dans le dépôt `Effet_fondateur2`.
   règles d’exécution.
 - [Plan de développement](development_plan.md) : petits lots, tests et portes
   de sortie.
+- [Livraison progressive de l'interface](ui_delivery_plan.md) : pages livrées
+  par lot, états obligatoires et correspondance avec les maquettes.
 - [Audit et décisions](decisions.md) : décisions acquises, propositions,
   questions ouvertes et échéances.
 - [Profil des conventions web](conventions-profile.md) : règles HTML/CSS/JS et
@@ -37,7 +39,9 @@ En cas de divergence :
    sorties exécutables ;
 2. les documents `docs/modules/` du moteur définissent leur interprétation ;
 3. ce dossier définit le domaine et l’orchestration web ;
-4. les maquettes du moteur restent des propositions d’interface, pas une API.
+4. les maquettes du moteur définissent la référence de parcours et de hiérarchie
+   visuelle retenue pour le prototype, mais ne constituent ni une API ni une
+   identité graphique définitive.
 
 Une divergence est documentée puis résolue par une évolution explicite du bon
 contrat. Elle ne doit pas être compensée par une conversion silencieuse.

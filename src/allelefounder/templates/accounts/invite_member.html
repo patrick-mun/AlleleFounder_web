@@ -1,0 +1,26 @@
+{% extends "base_app.html" %}
+{% block title %}Inviter un membre — AlleleFounder{% endblock %}
+{% block content %}
+<!-- ── INVITATION ── -->
+<header class="page-heading">
+  <div>
+    <p class="eyebrow">{{ organization.name }}</p>
+    <h1>Inviter une personne</h1>
+    <p>Le lien d’activation expirera après sept jours.</p>
+  </div>
+</header>
+<form class="form-card form-card-compact" method="post">
+  {% csrf_token %} {% for field in form %}
+  <div class="form-field">
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{{
+    field.errors }}
+  </div>
+  {% endfor %}
+  <div class="action-group">
+    <button class="button" type="submit">Envoyer l’invitation</button
+    ><a class="button button-secondary" href="{% url 'accounts:team' %}"
+      >Annuler</a
+    >
+  </div>
+</form>
+{% endblock %}

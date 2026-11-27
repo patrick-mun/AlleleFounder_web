@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Service indisponible — AlleleFounder{% endblock %}
+{% block content %}
+<section class="error-page">
+  <p class="eyebrow">Indisponibilité temporaire</p>
+  <h1>Le service ne peut pas répondre pour le moment.</h1>
+  <p>Vos données ne sont pas perdues. Réessayez dans quelques instants.</p>
+  <a class="button button-secondary" href="{% url 'home' %}"
+    >Revenir à l’accueil</a
+  >
+</section>
+{% endblock %}

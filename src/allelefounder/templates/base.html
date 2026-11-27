@@ -6,23 +6,60 @@
     <title>{% block title %}Accueil — AlleleFounder{% endblock %}</title>
     <meta
       name="description"
-      content="Interface institutionnelle du logiciel AlleleFounder."
+      content="AlleleFounder organise des études familiales et la traçabilité de leurs analyses."
     />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'allelefounder/css/tokens.css' %}" />
+    <link rel="stylesheet" href="{% static 'allelefounder/css/base.css' %}" />
   </head>
   <body>
-    <!-- ── EN-TÊTE ── -->
-    <header>
-      <a href="{% url 'home' %}">AlleleFounder</a>
+    <a class="skip-link" href="#contenu-principal">Aller au contenu</a>
+
+    <!-- ── EN-TÊTE PUBLIC ── -->
+    <header class="public-header">
+      <nav class="public-nav" aria-label="Navigation principale">
+        <a class="brand" href="{% url 'home' %}">AlleleFounder</a>
+        <ul class="public-nav-list">
+          <li><a href="{% url 'home' %}#fonctionnement">Fonctionnement</a></li>
+          <li><a href="{% url 'home' %}#securite">Sécurité</a></li>
+          {% if user.is_authenticated %}
+          {% if user.is_staff %}
+          <li>
+            <a href="{% url 'accounts:access-request-list' %}">Demandes</a>
+          </li>
+          {% endif %}
+          <li>
+            <a class="button button-small" href="{% url 'accounts:dashboard' %}"
+              >Mon espace</a
+            >
+          </li>
+          {% else %}
+          <li>
+            <a class="button button-small" href="{% url 'account_login' %}"
+              >Connexion</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
     </header>
 
+    <!-- ── MESSAGES ── -->
+    {% if messages %}
+    <aside class="message-region" aria-label="Messages système">
+      {% for message in messages %}
+      <p class="message">{{ message }}</p>
+      {% endfor %}
+    </aside>
+    {% endif %}
+
     <!-- ── CONTENU ── -->
-    <main id="contenu-principal">
-      {% block content %}{% endblock %}
-    </main>
+    <main id="contenu-principal">{% block content %}{% endblock %}</main>
 
     <!-- ── PIED DE PAGE ── -->
-    <footer>
+    <footer class="public-footer">
       <p>Outil d’aide à l’analyse — validation scientifique requise.</p>
+      <p>Aucune donnée génétique réelle dans cette version de démonstration.</p>
     </footer>
   </body>
 </html>

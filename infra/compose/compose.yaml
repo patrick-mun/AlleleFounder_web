@@ -15,6 +15,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql
 
+  mailpit:
+    image: axllent/mailpit:v1.34.0@sha256:23a2ef85bc50853ab3093645d1d64679afd8887e89da5e48a88940c172591a4e
+    ports:
+      - "127.0.0.1:8025:8025"
+
   web:
     build:
       context: ../..
@@ -22,9 +27,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      mailpit:
+        condition: service_started
     environment:
       DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
       DJANGO_DEBUG: "false"
+      DJANGO_EMAIL_HOST: mailpit
+      DJANGO_EMAIL_PORT: 1025
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?DJANGO_SECRET_KEY is required}
       DJANGO_SETTINGS_MODULE: allelefounder.config.settings.local
       POSTGRES_DB: ${POSTGRES_DB:?POSTGRES_DB is required}

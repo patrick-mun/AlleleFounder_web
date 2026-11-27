@@ -1,0 +1,35 @@
+{% extends "base_app.html" %}
+{% block title %}Vue d’ensemble — AlleleFounder{% endblock %}
+{% block content %}
+<!-- ── TABLEAU DE BORD ── -->
+<header class="page-heading">
+  <div>
+    <p class="eyebrow">
+      {{ organization.name }} · {{ membership.get_role_display }}
+    </p>
+    <h1>Bonjour {{ user.first_name|default:user.email }}</h1>
+    <p>Votre espace est prêt. Les études seront introduites au lot 3.</p>
+  </div>
+  <span class="button is-disabled" aria-disabled="true"
+    >Nouvelle étude — lot 3</span
+  >
+</header>
+<ul class="metric-grid">
+  <li class="metric-card"><span>Études actives</span><strong>0</strong></li>
+  <li class="metric-card"><span>Analyses en cours</span><strong>0</strong></li>
+  <li class="metric-card">
+    <span>Décisions attendues</span><strong>0</strong>
+  </li>
+</ul>
+<section class="empty-panel">
+  <p class="eyebrow">Mes actions</p>
+  <h2>Aucune action en attente</h2>
+  <p>
+    Les invitations d’équipe restent accessibles maintenant. Les études et
+    analyses seront ajoutées progressivement dans les prochains lots.
+  </p>
+  <a class="button button-secondary" href="{% url 'accounts:team' %}"
+    >Voir l’équipe</a
+  >
+</section>
+{% endblock %}

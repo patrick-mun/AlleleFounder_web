@@ -12,12 +12,17 @@ DEBUG = False
 ALLOWED_HOSTS: list[str] = []
 
 INSTALLED_APPS = [
+    "django.contrib.humanize",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "allauth",
+    "allauth.account",
+    "allauth.mfa",
+    "allauth.usersessions",
     "allelefounder.accounts.apps.AccountsConfig",
 ]
 
@@ -29,6 +34,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -78,6 +84,31 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = "accounts.User"
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+ACCOUNT_ADAPTER = "allelefounder.accounts.adapters.PrivateAccountAdapter"
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_CONFIRM_EMAIL_ON_GET = False
+ACCOUNT_LOGOUT_ON_GET = False
+ACCOUNT_LOGIN_TIMEOUT = 900
+ACCOUNT_SESSION_REMEMBER = False
+MFA_SUPPORTED_TYPES = ["totp", "webauthn", "recovery_codes"]
+MFA_ADAPTER = "allelefounder.accounts.adapters.EncryptedMFAAdapter"
+MFA_PASSKEY_LOGIN_ENABLED = True
+MFA_WEBAUTHN_USER_VERIFICATION = "required"
+MFA_RECOVERY_CODES_SHOW_ONCE = True
+MFA_TOTP_ISSUER = "AlleleFounder"
+MFA_ENCRYPTION_KEY = None
+USERSESSIONS_TRACK_ACTIVITY = False
+LOGIN_REDIRECT_URL = "accounts:dashboard"
+LOGIN_URL = "account_login"
+ACCOUNT_LOGOUT_REDIRECT_URL = "home"
+DEFAULT_FROM_EMAIL = "AlleleFounder <noreply@allelefounder.invalid>"
 LANGUAGE_CODE = "fr-fr"
 TIME_ZONE = "UTC"
 USE_I18N = True
@@ -85,6 +116,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [SRC_DIR / "allelefounder" / "static"]
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
     "staticfiles": {

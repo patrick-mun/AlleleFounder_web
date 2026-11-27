@@ -2,7 +2,7 @@
 
 from django.core.exceptions import ImproperlyConfigured
 
-from allelefounder.config.environment import csv
+from allelefounder.config.environment import csv, integer, required
 
 from .base import *  # noqa: F403
 
@@ -24,3 +24,12 @@ SECURE_HSTS_PRELOAD = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = required("DJANGO_EMAIL_HOST")
+EMAIL_PORT = integer("DJANGO_EMAIL_PORT", default=587, minimum=1, maximum=65535)
+EMAIL_HOST_USER = required("DJANGO_EMAIL_USER")
+EMAIL_HOST_PASSWORD = required("DJANGO_EMAIL_PASSWORD")
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = required("DJANGO_DEFAULT_FROM_EMAIL")
+MFA_ENCRYPTION_KEY = required("DJANGO_MFA_ENCRYPTION_KEY")

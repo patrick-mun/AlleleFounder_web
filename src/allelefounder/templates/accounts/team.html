@@ -1,0 +1,70 @@
+{% extends "base_app.html" %}
+{% block title %}Équipe — AlleleFounder{% endblock %}
+{% block content %}
+<!-- ── ÉQUIPE ── -->
+<header class="page-heading">
+  <div>
+    <p class="eyebrow">{{ organization.name }}</p>
+    <h1>Équipe</h1>
+    <p>Les rôles déterminent les actions autorisées dans cette organisation.</p>
+  </div>
+  {% if membership.role == "ADMIN" %}<a
+    class="button"
+    href="{% url 'accounts:invite-member' %}"
+    >Inviter une personne</a
+  >{% endif %}
+</header>
+<div class="table-wrap">
+  <table>
+    <caption>
+      Membres actifs
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Membre</th>
+        <th scope="col">Rôle</th>
+          <th scope="col">État</th>
+          {% if membership.role == "ADMIN" %}<th scope="col">Modifier le rôle</th>{% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in team_memberships %}
+      <tr>
+        <td>{{ item.user.get_full_name|default:item.user.email }}</td>
+        <td>{{ item.get_role_display }}</td>
+          <td><span class="status">Actif</span></td>
+          {% if membership.role == "ADMIN" %}
+            <td>
+              <form class="role-form" method="post" action="{% url 'accounts:change-member-role' item.public_id %}">
+                {% csrf_token %}
+                <label>
+                  <span class="visually-hidden">Rôle de {{ item.user.email }}</span>
+                  <select name="role">
+                    <option value="{{ item.role }}">{{ item.get_role_display }} — actuel</option>
+                    {% for value, label in role_choices %}<option value="{{ value }}">{{ label }}</option>{% endfor %}
+                  </select>
+                </label>
+                <button class="button button-small" type="submit">Enregistrer</button>
+              </form>
+            </td>
+          {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% if pending_invitations %}
+<section class="list-section">
+  <h2>Invitations en attente</h2>
+  <ul class="simple-list">
+    {% for invitation in pending_invitations %}
+    <li>
+      <span>{{ invitation.email }}</span
+      ><span>{{ invitation.get_role_display }}</span
+      ><span>Expire le {{ invitation.expires_at|date:"d/m/Y" }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Choisir une organisation — AlleleFounder{% endblock %}
+{% block content %}
+<!-- ── SÉLECTION D'ORGANISATION ── -->
+<section class="form-page">
+  <div class="form-heading">
+    <p class="eyebrow">Contexte de travail</p>
+    <h1>Choisir une organisation</h1>
+    <p>Les données et autorisations restent isolées entre organisations.</p>
+  </div>
+  <form class="choice-list" method="post">
+    {% csrf_token %} {% for item in memberships %}<label class="choice-card"
+      ><input
+        type="radio"
+        name="organization"
+        value="{{ item.organization.public_id }}"
+        required
+      /><span
+        ><strong>{{ item.organization.name }}</strong
+        ><small>{{ item.get_role_display }}</small></span
+      ></label
+    >{% empty %}
+    <p class="empty-state">
+      Aucune organisation active n’est associée à ce compte.
+    </p>
+    {% endfor %} {% if memberships %}<button class="button" type="submit">
+      Continuer</button
+    >{% endif %}
+  </form>
+</section>
+{% endblock %}

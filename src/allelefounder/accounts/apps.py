@@ -10,3 +10,7 @@ class AccountsConfig(AppConfig):
     name = "allelefounder.accounts"
     label = "accounts"
     verbose_name = "Comptes"
+
+    def ready(self) -> None:
+        """Branche les signaux d'audit de sécurité."""
+        from . import signals  # noqa: F401
